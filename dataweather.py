@@ -18,45 +18,6 @@ def load_data():
 
 df = load_data()
 
-# # Display the first few rows of the dataset
-# st.subheader("Dataset Preview")
-# st.write(df.head())
-
-# # Data Exploration Section
-# st.subheader("Data Exploration")
-
-# # Shape of the dataset
-# st.write(f"Shape of the dataset: {df.shape}")
-
-# # Column names
-# st.write("Columns in the dataset:")
-# st.write(df.columns)
-
-# # Quick summary of the dataset
-# st.write("Dataset Info:")
-# st.write(df.info())
-
-# # Basic statistics for numeric columns
-# st.write("Basic Statistics for Numeric Columns:")
-# st.write(df.describe())
-
-# # Count of missing values per column
-# st.write("Count of Missing Values per Column:")
-# st.write(df.isnull().sum())
-
-# # Check for duplicates
-# st.write("Number of duplicate rows:", df.duplicated().sum())
-# st.write("Duplicate Rows:")
-# st.write(df[df.duplicated()])
-
-# # Number of unique values in each column
-# st.write("Number of Unique Values in Each Column:")
-# st.write(df.nunique())
-
-# # Random sample of 'Daily Summary' values
-# st.write("Random Sample of 'Daily Summary' Values:")
-# st.write(df['Daily Summary'].sample(30))
-
 #  fill rows with 'UnKnown' for missing values
 df['Precip Type'] = df['Precip Type'].fillna('Unknown')
 
@@ -204,24 +165,6 @@ def myareachart(df_cleaned):
     )
     st.plotly_chart(fig)
 
-# def mybubblechart(df_cleaned):
-#     datasample = 300
-#     dataSample = df_cleaned[['Wind Speed (km/h)', 'Visibility (km)']].sample(n=datasample, random_state=42)
-#     fig = px.scatter(dataSample, 
-#                      x='Wind Speed (km/h)', 
-#                      y='Visibility (km)',
-#                      color='Wind Speed (km/h)',
-#                      color_continuous_scale='twilight',
-#                      title='Wind Speed vs Visibility',
-#                      size_max=40)
-    
-#     fig.update_layout(
-#         coloraxis_colorbar=dict(title='Wind Speed Intensity'),
-#         xaxis_title='Wind Speed (km/h)',
-#         yaxis_title='Visibility (km)'
-#     )
-#     st.plotly_chart(fig)
-
 def myPieChart(df):
     precip_counts = df['Precip Type'].value_counts().reset_index()
     precip_counts.columns = ['Precip Type', 'Count']
@@ -253,9 +196,6 @@ def main():
     
     st.subheader("Wind Speed Trends Over Years")
     myareachart(df_cleaned)
-
-    # st.subheader("Wind Speed vs Visibility")
-    # mybubblechart(df_cleaned)
 
     st.subheader("Precipitation Type Distribution")
     myPieChart(df)
